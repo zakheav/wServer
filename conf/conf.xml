@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<recipe>
+	<config>
+		<mysql>
+			<url>jdbc:mysql://127.0.0.1:3306/test</url>
+			<user>root</user>
+			<password></password>
+		</mysql>
+		<server>
+			<ip>127.0.0.1</ip>
+			<port>8080</port>
+		</server>
+		<servlets>
+			<servlet uri="/index1" class="servlet.AServlet"></servlet>
+			<servlet uri="/index2" class="servlet.BServlet"></servlet>
+		</servlets>
+	</config>
+	
+	<objects><!-- 对象依赖配置 -->
+		<object id="AOP" class="aop.AOP">
+			<property name="service">
+				<ref id="hello"></ref>
+			</property>
+		</object>
+		<object id="hello" class="servlet.Hello"></object>
+	</objects>
+</recipe>
