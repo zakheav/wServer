@@ -5,6 +5,7 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Map;
+import org.apache.log4j.PropertyConfigurator;
 import dbpool.DBpool;
 import threadPool.ThreadPoolTask;
 import threadPool.ThreadPool;
@@ -21,7 +22,7 @@ public class HttpServer {
 	private static void init() {
 		XML xml = new XML();
 		// 启动连接池
-		// DBpool.getInstance();
+		DBpool.getInstance();
 		// 启动线程池
 		tp = ThreadPool.getInstance();
 		// 生成servlet
@@ -36,6 +37,8 @@ public class HttpServer {
 		Map<String, String> serverConf = xml.getServerConf();
 		HttpServer.ip = serverConf.get("ip");
 		HttpServer.port = Integer.parseInt(serverConf.get("port"));
+		// 加载log选项
+		PropertyConfigurator.configure("conf/log4j.properties");
 	}
 
 	public static void start() {

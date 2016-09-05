@@ -1,0 +1,92 @@
+2016 53 05, 03:53:24 下午 : ERROR [Thread-6] class webServer.Servlet
+java.lang.ArithmeticException: / by zero
+	at servlet.BServlet.business(BServlet.java:11)
+	at webServer.Servlet.reply(Servlet.java:12)
+	at threadPool.ThreadPoolTask.run(ThreadPoolTask.java:29)
+	at threadPool.ThreadPool$Worker.run(ThreadPool.java:43)
+2016 53 05, 03:53:24 下午 : ERROR [Thread-5] class webServer.Servlet
+java.lang.ArithmeticException: / by zero
+	at servlet.BServlet.business(BServlet.java:11)
+	at webServer.Servlet.reply(Servlet.java:12)
+	at threadPool.ThreadPoolTask.run(ThreadPoolTask.java:29)
+	at threadPool.ThreadPool$Worker.run(ThreadPool.java:43)
+2016 53 05, 03:53:24 下午 : ERROR [Thread-4] class webServer.Servlet
+java.lang.ArithmeticException: / by zero
+	at servlet.BServlet.business(BServlet.java:11)
+	at webServer.Servlet.reply(Servlet.java:12)
+	at threadPool.ThreadPoolTask.run(ThreadPoolTask.java:29)
+	at threadPool.ThreadPool$Worker.run(ThreadPool.java:43)
+2016 53 05, 03:53:24 下午 : ERROR [Thread-3] class webServer.Servlet
+java.lang.ArithmeticException: / by zero
+	at servlet.BServlet.business(BServlet.java:11)
+	at webServer.Servlet.reply(Servlet.java:12)
+	at threadPool.ThreadPoolTask.run(ThreadPoolTask.java:29)
+	at threadPool.ThreadPool$Worker.run(ThreadPool.java:43)
+2016 53 05, 03:53:24 下午 : ERROR [Thread-2] class webServer.Servlet
+java.lang.ArithmeticException: / by zero
+	at servlet.BServlet.business(BServlet.java:11)
+	at webServer.Servlet.reply(Servlet.java:12)
+	at threadPool.ThreadPoolTask.run(ThreadPoolTask.java:29)
+	at threadPool.ThreadPool$Worker.run(ThreadPool.java:43)
+2016 53 05, 03:53:29 下午 : ERROR [Thread-1] class webServer.Servlet
+java.lang.ArithmeticException: / by zero
+	at servlet.BServlet.business(BServlet.java:11)
+	at webServer.Servlet.reply(Servlet.java:12)
+	at threadPool.ThreadPoolTask.run(ThreadPoolTask.java:29)
+	at threadPool.ThreadPool$Worker.run(ThreadPool.java:43)
+2016 09 05, 03:56:19 下午 : ERROR [Thread-8] class webServer.Servlet
+java.lang.ArithmeticException: / by zero
+	at servlet.BServlet.business(BServlet.java:11)
+	at webServer.Servlet.reply(Servlet.java:12)
+	at threadPool.ThreadPoolTask.run(ThreadPoolTask.java:29)
+	at threadPool.ThreadPool$Worker.run(ThreadPool.java:43)
+2016 09 05, 03:57:54 下午 : ERROR [Thread-5] class webServer.Servlet
+java.lang.ArithmeticException: / by zero
+	at servlet.BServlet.business(BServlet.java:11)
+	at webServer.Servlet.reply(Servlet.java:12)
+	at threadPool.ThreadPoolTask.run(ThreadPoolTask.java:29)
+	at threadPool.ThreadPool$Worker.run(ThreadPool.java:43)
+2016 09 05, 03:57:54 下午 : ERROR [Thread-4] class webServer.Servlet
+java.lang.ArithmeticException: / by zero
+	at servlet.BServlet.business(BServlet.java:11)
+	at webServer.Servlet.reply(Servlet.java:12)
+	at threadPool.ThreadPoolTask.run(ThreadPoolTask.java:29)
+	at threadPool.ThreadPool$Worker.run(ThreadPool.java:43)
+2016 09 05, 03:57:54 下午 : ERROR [Thread-3] class webServer.Servlet
+java.lang.ArithmeticException: / by zero
+	at servlet.BServlet.business(BServlet.java:11)
+	at webServer.Servlet.reply(Servlet.java:12)
+	at threadPool.ThreadPoolTask.run(ThreadPoolTask.java:29)
+	at threadPool.ThreadPool$Worker.run(ThreadPool.java:43)
+2016 09 05, 03:57:54 下午 : ERROR [Thread-2] class webServer.Servlet
+java.lang.ArithmeticException: / by zero
+	at servlet.BServlet.business(BServlet.java:11)
+	at webServer.Servlet.reply(Servlet.java:12)
+	at threadPool.ThreadPoolTask.run(ThreadPoolTask.java:29)
+	at threadPool.ThreadPool$Worker.run(ThreadPool.java:43)
+2016 09 05, 03:58:10 下午 : ERROR [Thread-1] class webServer.Servlet
+java.lang.ArithmeticException: / by zero
+	at servlet.BServlet.business(BServlet.java:11)
+	at webServer.Servlet.reply(Servlet.java:12)
+	at threadPool.ThreadPoolTask.run(ThreadPoolTask.java:29)
+	at threadPool.ThreadPool$Worker.run(ThreadPool.java:43)
+2016 09 05, 03:58:33 下午 : ERROR [Thread-8] class webServer.Servlet
+java.lang.ArithmeticException: / by zero
+	at servlet.BServlet.business(BServlet.java:11)
+	at webServer.Servlet.reply(Servlet.java:12)
+	at threadPool.ThreadPoolTask.run(ThreadPoolTask.java:29)
+	at threadPool.ThreadPool$Worker.run(ThreadPool.java:43)
+2016 09 05, 03:58:43 下午 : ERROR [Thread-9] class webServer.Servlet
+java.lang.ArithmeticException: / by zero
+	at servlet.BServlet.business(BServlet.java:11)
+	at webServer.Servlet.reply(Servlet.java:12)
+	at threadPool.ThreadPoolTask.run(ThreadPoolTask.java:29)
+	at threadPool.ThreadPool$Worker.run(ThreadPool.java:43)
+2016 09 05, 03:58:43 下午 : ERROR [Thread-7] class webServer.Servlet
+java.lang.ArithmeticException: / by zero
+	at servlet.BServlet.business(BServlet.java:11)
+	at webServer.Servlet.reply(Servlet.java:12)
+	at threadPool.ThreadPoolTask.run(ThreadPoolTask.java:29)
+	at threadPool.ThreadPool$Worker.run(ThreadPool.java:43)
+2016 09 05, 04:02:09 下午 : INFO [Thread-8] this is a log info test
+2016 09 05, 04:18:02 下午 : INFO [Thread-8] this is a log info test

@@ -2,9 +2,9 @@
 <recipe>
 	<config>
 		<mysql>
-			<url>jdbc:mysql://127.0.0.1:3306/test</url>
+			<url>jdbc:mysql://60.205.114.50:3306/mebms?characterEncoding=utf8</url>
 			<user>root</user>
-			<password></password>
+			<password>1qaz@WSX</password>
 		</mysql>
 		<server>
 			<ip>127.0.0.1</ip>
