@@ -26,6 +26,38 @@ public class Query {
 		return this;
 	}
 	
+	public Query insertInto(String table_attr) {
+		this.queryString = "insert into " + table_attr;
+		return this;
+	}
+	
+	public Query deleteFrom(String table){
+		this.queryString = "delete from " + table;
+		return this;
+	}
+
+	public Query values(ArrayList<Object> params) {
+		this.queryString += " values (";
+		for (int i = 0; i < params.size(); ++i) {
+			if (params.get(i) instanceof Integer || params.get(i) instanceof Long || params.get(i) instanceof Float
+					|| params.get(i) instanceof Double) {
+				if (i < params.size() - 1) {
+					this.queryString += params.get(i) + ", ";
+				} else {
+					this.queryString += params.get(i) + ") ";
+				}
+			}
+			if (params.get(i) instanceof String) {
+				if (i < params.size() - 1) {
+					this.queryString += "'" + params.get(i) + "', ";
+				} else {
+					this.queryString += "'" + params.get(i) + "') ";
+				}
+			}
+		}
+		return this;
+	}
+	
 	public Query set(HashMap<String, Object> attr_value){
 		this.queryString += " set ";
 		
@@ -175,4 +207,7 @@ public class Query {
 		return DBpool.getInstance().executeQuery(queryString);
 	}
 	
+	public void addToTrasaction(Trasaction t) {
+		t.queryStringList.add(queryString);
+	}
 }

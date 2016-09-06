@@ -251,10 +251,11 @@ public class DBpool {
 				return true;
 			} catch (Exception e2) {// 重新查询事务执行出错
 				try{
+					log.error(DBpool.class, e2);
 					e_conn.rollback();// 回滚
 					return false;
 				} catch(Exception e3) {
-					log.error(DBpool.class, e2);
+					log.error(DBpool.class, e3);
 					return false;
 				}
 			} finally {// 释放资源

@@ -2,9 +2,9 @@
 <recipe>
 	<config>
 		<mysql>
-			<url>jdbc:mysql://60.205.114.50:3306/mebms?characterEncoding=utf8</url>
+			<url>jdbc:mysql://localhost:3306/wcache?characterEncoding=utf8</url>
 			<user>root</user>
-			<password>1qaz@WSX</password>
+			<password></password>
 		</mysql>
 		<server>
 			<ip>127.0.0.1</ip>
@@ -13,6 +13,7 @@
 		<servlets>
 			<servlet uri="/index1" class="servlet.AServlet"></servlet>
 			<servlet uri="/index2" class="servlet.BServlet"></servlet>
+			<servlet uri="/index3" class="servlet.CServlet"></servlet>
 		</servlets>
 	</config>
 	
