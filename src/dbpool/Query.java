@@ -81,7 +81,7 @@ public class Query {
 		} else if (value instanceof String) {
 			this.queryString += " = '" + value + "'";
 		} else {
-			return null;// �Ƿ���������
+			return null;
 		}
 		return this;
 	}
@@ -174,12 +174,5 @@ public class Query {
 		this.queryString += " group by " + Group;
 		return DBpool.getInstance().executeQuery(queryString);
 	}
-
-//	public static void main(String[] args) {
-//		HashMap<String, Object> attr_value = new HashMap<String, Object>();
-//		attr_value.put("name","weiyuan");
-//		attr_value.put("age", 24);
-//		
-//		new Query().update("user").set(attr_value).where("tel").equal("18810543471").executeUpdate();
-//	}
+	
 }

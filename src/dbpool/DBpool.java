@@ -13,10 +13,12 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
 import util.XML;
 
 public class DBpool {
-
+	private static Logger log = Logger.getLogger(DBpool.class);
 	private static String url = "";
 	private static String user = "";
 	private static String password = "";
@@ -54,16 +56,15 @@ public class DBpool {
 	public String get_url() {
 		return url;
 	}
-	
 
 	public String get_user() {
 		return user;
 	}
-	
+
 	public String get_password() {
 		return password;
 	}
-	
+
 	public String get_driverClassName() {
 		return driverClassName;
 	}
@@ -83,8 +84,7 @@ public class DBpool {
 				result.add(row);
 			}
 		} catch (Exception e) {
-
-			e.printStackTrace();
+			log.error(DBpool.class, e);
 		}
 		return result;
 	}
@@ -94,7 +94,7 @@ public class DBpool {
 			Connection conn = DriverManager.getConnection(DBpool.url, DBpool.user, DBpool.password);
 			return conn;
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(DBpool.class, e);
 			return null;
 		}
 	}
@@ -108,7 +108,7 @@ public class DBpool {
 						pool.offer(conn);
 					}
 				} catch (Exception e) {
-					e.printStackTrace();
+					log.error(DBpool.class, e);
 				}
 			}
 		}
@@ -120,7 +120,7 @@ public class DBpool {
 				try {
 					pool.wait();
 				} catch (InterruptedException e) {
-					e.printStackTrace();
+					log.error(DBpool.class, e);
 				}
 			}
 			if (pool.isEmpty() && (nowTotalConnections < maxPoolSize)) {
@@ -145,10 +145,10 @@ public class DBpool {
 					cn.close();
 					--nowTotalConnections;
 				} catch (Exception e) {
-					e.printStackTrace();
+					log.error(DBpool.class, e);
 				}
 			} else {
-				synchronized(pool){
+				synchronized (pool) {
 					pool.offer(cn);
 					pool.notifyAll();
 				}
@@ -168,7 +168,7 @@ public class DBpool {
 		try {
 			conn = getConnection();
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery(queryString);//出问题
+			rs = stmt.executeQuery(queryString);// 出问题
 			result = resultSet_to_obj(rs);
 			return result;
 		} catch (Exception e1) {// 可能连接失效
@@ -184,6 +184,7 @@ public class DBpool {
 				result = resultSet_to_obj(e_rs);
 				return result;
 			} catch (Exception e2) {
+				log.error(DBpool.class, e2);
 				return null;
 			} finally {// 释放资源
 				try {
@@ -191,21 +192,90 @@ public class DBpool {
 					e_stmt.close();
 					releaseConnection(e_conn);
 				} catch (SQLException e3) {
-					e3.printStackTrace();
+					log.error(DBpool.class, e3);
 				}
 			}
 		} finally {// 释放资源
 			try {
-				if( !connection_timeout ){
+				if (!connection_timeout) {
 					rs.close();
 					stmt.close();
 					releaseConnection(conn);
-				} else{
+				} else {
 					stmt.close();
 					conn.close();
 				}
 			} catch (SQLException e4) {
-				e4.printStackTrace();
+				log.error(DBpool.class, e4);
+			}
+		}
+	}
+
+	public boolean trasaction(ArrayList<String> queryList) {
+		Connection conn = null;
+		Connection e_conn = null;// 错误状态下重新分配的connection
+		Statement stmt = null;
+		Statement e_stmt = null;// e_conn生成的statement
+		boolean connection_timeout = false;
+		try {
+			conn = getConnection();
+			conn.setAutoCommit(false);
+			stmt = conn.createStatement();
+			for(String queryString : queryList) {
+				stmt.executeUpdate(queryString);// 出问题
+			}
+			conn.commit();// 提交
+			return true;
+		} catch (Exception e) {// 可能连接失效
+			// 尝试回滚
+			try {
+				conn.rollback();
+			} catch(Exception e1) {
+				e1.printStackTrace();
+			}
+			
+			try {
+				// 释放掉无用链接
+				connectionsInUse.remove(conn);
+				connection_timeout = true;
+				e_conn = newConnection();
+				connectionsInUse.add(e_conn);// 更新连接
+				
+				// 重新查询
+				e_conn.setAutoCommit(false);
+				e_stmt = e_conn.createStatement();
+				for(String queryString : queryList) {
+					e_stmt.executeUpdate(queryString);
+				}
+				e_conn.commit();// 提交
+				return true;
+			} catch (Exception e2) {// 重新查询事务执行出错
+				try{
+					e_conn.rollback();// 回滚
+					return false;
+				} catch(Exception e3) {
+					log.error(DBpool.class, e2);
+					return false;
+				}
+			} finally {// 释放资源
+				try {
+					e_stmt.close();
+					releaseConnection(e_conn);
+				} catch (SQLException e4) {
+					log.error(DBpool.class, e4);
+				}
+			}
+		} finally {// 释放资源
+			try {
+				if (!connection_timeout) {
+					stmt.close();
+					releaseConnection(conn);
+				} else {
+					stmt.close();
+					conn.close();
+				}
+			} catch (SQLException e5) {
+				log.error(DBpool.class, e5);
 			}
 		}
 	}
@@ -233,31 +303,29 @@ public class DBpool {
 				e_stmt.executeUpdate(queryString);
 				return true;
 			} catch (Exception e2) {
+				log.error(DBpool.class, e2);
 				return false;
 			} finally {
 				try {
 					e_stmt.close();
 					releaseConnection(e_conn);
 				} catch (SQLException e3) {
-					e3.printStackTrace();
+					log.error(DBpool.class, e3);
 				}
 			}
 		} finally {
 			try {
-				if(!connection_timeout){
+				if (!connection_timeout) {
 					stmt.close();
 					releaseConnection(conn);
-				} else{
+				} else {
 					stmt.close();
 					conn.close();
 				}
 			} catch (SQLException e4) {
-				e4.printStackTrace();
+				log.error(DBpool.class, e4);
 			}
 		}
 	}
 
-	public synchronized void closePool() {
-
-	}
 }
